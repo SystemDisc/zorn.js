@@ -11,4 +11,6 @@ module.exports = function()
 	}
 	zorn.$rootElem = zorn.$rootElem[0];
 	zorn.$rootElem.$scope = {};
+
+	require('../zBind');
 };
