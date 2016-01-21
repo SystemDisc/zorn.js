@@ -34,6 +34,16 @@ module.exports = function(grunt)
 			}
 		},
 
+		watch: {
+			scripts: {
+				files: ['src/**/*.js'],
+				tasks: ['default'],
+				options: {
+					spawn: false,
+				},
+			},
+		},
+
 		clean: {
 			build: ['build/*']
 		}
