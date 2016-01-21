@@ -11,4 +11,5 @@ module.exports = function()
 	zorn.$rootElem.$scope = {};
 
 	require('../zBind');
+	require('../zView');
 };
