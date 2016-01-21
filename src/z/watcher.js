@@ -1,7 +1,5 @@
 'use strict';
 
-var $ = require('jquery-browserify');
-
 var watcher = {
 	setup: function(obj, val)
 	{
@@ -21,19 +19,18 @@ var watcher = {
 			{
 				this.val = newValue;
 
-				if ($.isArray(this.elems))
+				if (Array.isArray(this.elems))
 				{
 					for (var i in this.elems)
 					{
 						var elem = this.elems[i];
-						var $elem = $(elem);
 						if (elem.value !== undefined)
 						{
-							$elem.val(newValue);
+							elem.value = newValue;
 						}
 						else
 						{
-							$elem.html(newValue);
+							elem.innerHTML = newValue;
 						}
 					}
 				}

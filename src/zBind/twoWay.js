@@ -1,23 +1,19 @@
 'use strict';
 
-var $ = require('jquery-browserify');
-
 var dataBind = function(e)
 {
-	var $this = $(this);
-	var data = $this.data();
-
-	data.$scope.value = $this.val();
+	this.data.$scope.value = this.value;
 };
 
 var reservedNames = ['value', 'val'];
 
-$('[z-bind]').each(function()
-{
-	var $this = $(this);
-	$this.bind('input', dataBind);
+console.log(document.querySelectorAll('[z-bind]'));
 
-	var objParts = $this.attr('z-bind').split('.');
+Array.prototype.forEach.call(document.querySelectorAll('[z-bind]'), function(elem)
+{
+	elem.addEventListener('input', dataBind);
+
+	var objParts = elem.getAttribute('z-bind').split('.');
 	var obj = zorn.$rootElem.$scope;
 	for (var i in objParts)
 	{
@@ -43,8 +39,7 @@ $('[z-bind]').each(function()
 		zorn.watcher.setup(obj);
 	}
 
-	var data = $this.data();
-	data.$scope = obj;
+	elem.data.$scope = obj;
 
 	if (obj.elems === undefined)
 	{
