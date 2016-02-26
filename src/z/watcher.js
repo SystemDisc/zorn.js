@@ -8,34 +8,53 @@ var watcher = {
 			obj = obj[val] = {};
 		}
 
-		obj.val = '';
+		obj.val = null;
 
-		Object.defineProperty(obj, 'value', {
-			get: function()
+		var handler = {
+			get: function(target, name)
 			{
-				return this.val;
-			},
-			set: function(newValue)
-			{
-				this.val = newValue;
-
-				if (Array.isArray(this.elems))
+				console.log(name);
+				if(name !== 'value')
 				{
-					for (var i in this.elems)
+					return target[name];
+				}
+				return target.val;
+			},
+			set: function(target, name, value)
+			{
+				console.log(name, value);
+				if(name !== 'value')
+				{
+					target[name] = value;
+					return true;
+				}
+				target.val = value;
+
+				if (target.nodeType === 1)
+				{
+					target.value = value;
+					target = target.data.$scope;
+				}
+
+				if (target.elems !== undefined && Array.isArray(target.elems))
+				{
+					for (var i in target.elems)
 					{
-						var elem = this.elems[i];
+						var elem = target.elems[i];
 						if (elem.value !== undefined)
 						{
-							elem.value = newValue;
+							elem.value = value;
 						}
 						else
 						{
-							elem.innerHTML = newValue;
+							elem.innerHTML = value;
 						}
 					}
 				}
+				return true;
 			}
-		});
+		};
+		return new Proxy(obj, handler);
 	}
 };
 

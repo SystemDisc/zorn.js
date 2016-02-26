@@ -2,5 +2,6 @@
 
 module.exports = function()
 {
-	require('../zBind');
+	require('../zBind')
+		.then(function() { return require('../zId'); });
 };

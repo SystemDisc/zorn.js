@@ -1,3 +1,3 @@
 'use strict';
 
-require('./twoWay');
+module.exports = require('./twoWay');

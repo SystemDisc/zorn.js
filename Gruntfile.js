@@ -21,7 +21,9 @@ module.exports = function(grunt)
 				browser: true,
 				devel: true,
 				globals: {
-					zorn: true
+					zorn: true,
+					Promise: true,
+					Proxy: true
 				}
 			}
 		},
