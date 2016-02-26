@@ -1,4 +1,5 @@
 module.exports = {
 	watcher: require('./watcher'),
-	bootstrap: require('./bootstrap')
+	bootstrap: require('./bootstrap'),
+	compile: require('./compile')
 };
